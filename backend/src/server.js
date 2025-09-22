@@ -1,18 +1,16 @@
 import express from "express";
-import dotenv from "dotenv";
 import path from "path";
 
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
-
-dotenv.config();
+import { ENV } from "./lib/env.js";
 
 const app = express();
 
 const __dirname = path.resolve();
 
-const PORT = process.env.PORT;
+const PORT = ENV.PORT;
 
 app.use(express.json()); // to parse json body
 
@@ -21,7 +19,7 @@ app.use("/api/message", messageRoutes);
 
 // make ready for deployment
 
-if (process.env.NODE_ENV === "production") {
+if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
   app.get("*", (_, res) => {
@@ -33,3 +31,6 @@ app.listen(PORT, () => {
   console.log("Server is running on port:", PORT);
   connectDB();
 });
+
+
+// re_RQeoXyDq_J8QvRvmBnFtJr4u3fizwhSDB
