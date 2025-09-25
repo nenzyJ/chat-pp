@@ -17,7 +17,7 @@ app.use(express.json()); // to parse json body
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 // make ready for deployment
 
