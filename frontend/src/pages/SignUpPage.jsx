@@ -80,7 +80,7 @@ const SignUpPage = () => {
                     {/* PASSWORD */}
                     <label className="auth-input-label">Password</label>
                     <div className="relative">
-                      <UserIcon className="auth-input-icon" />
+                      <LockIcon className="auth-input-icon" />
 
                       <input
                         type="password"
