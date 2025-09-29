@@ -108,21 +108,34 @@ export const logout = (_, res) => {
 
 export const updateProfile = async (req, res) => {
   try {
-    const profilePic = req.body;
-    if (!profilePic)
+    console.log("updateProfile called, body:", req.body);
+    const { profilePic } = req.body;
+    
+    if (!profilePic) {
+      console.log("No profilePic in request body");
       return res.status(400).json({ message: "Profile picture is required" });
+    }
+    
+    console.log("ProfilePic length:", profilePic.length);
+    console.log("ProfilePic starts with:", profilePic.substring(0, 50));
+    
     const userId = req.user._id;
+    console.log("User ID:", userId);
 
+    console.log("Uploading to Cloudinary...");
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    console.log("Cloudinary upload response:", uploadResponse.secure_url);
+    
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: uploadResponse.secure_url },
       { new: true }
-    );
+    ).select("-password");
 
+    console.log("User updated successfully");
     res.status(200).json(updatedUser)
   } catch (error) {
     console.error("Error in updateProfile:", error);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

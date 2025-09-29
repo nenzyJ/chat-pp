@@ -13,9 +13,10 @@ const __dirname = path.resolve();
 
 const PORT = ENV.PORT || 3000;
 
-app.use(express.json()); // to parse json body
+app.use(express.json({ limit: '50mb' })); // to parse json body with larger limit
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors({
-  origin: ENV.CLIENT_URL,
+  origin: ENV.CLIENT_URL || "http://localhost:5173",
   credentials: true,
 }))
 app.use(cookieParser());

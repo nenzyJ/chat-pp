@@ -7,10 +7,11 @@ export const useAuthStore = create((set) => ({
     isCheckingAuth: true,
     isSigningUp: false,
     isLoggin: false,
+    onlineUsers: [], // Масив ID користувачів, які онлайн
 
     checkAuth: async () => {
         try {
-            const res =  axiosInstance.get("/auth/check")
+            const res = await axiosInstance.get("/auth/check")
             set({authUser: res.data})
         } catch (error) {
             console.log("Error checking auth:", error)
@@ -61,5 +62,15 @@ export const useAuthStore = create((set) => ({
             
         }
     },
-
+    updateProfile: async (profilePicData) => {
+        try {
+            const res = await axiosInstance.put("/auth/update-profile", profilePicData)
+            set({authUser: res.data})
+            toast.success("Profile updated successfully");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Error updating profile")
+        }   
+    },
+    
+    setOnlineUsers: (users) => set({onlineUsers: users})
  }))
