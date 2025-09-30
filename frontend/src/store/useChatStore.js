@@ -18,7 +18,10 @@ export const useChatStore = create((set, get) => ({
         set({isSoundEnabled: newValue})
     },
     setActiveTab: (tab) => set({activeTab: tab}),
-    setSelectUser: (selectedUser) => set({selectedUser}),
+    // preferred name
+    setSelectedUser: (selectedUser) => set({ selectedUser }),
+    // backward compatibility for older components
+    setSelectUser: (selectedUser) => set({ selectedUser }),
 
     getAllContacts: async() => {
         set({isUsersLoading: true});
@@ -44,4 +47,15 @@ export const useChatStore = create((set, get) => ({
             set({isUsersLoading: false});
         }
     },
+    getMessagesByUserId: async(userId) => {
+        set({ isMessagesLoading: true});
+        try {
+            const res = await axiosInstance.get(`/messages/${userId}`);
+            set({messages: res.data})
+        } catch (error) {
+            toast.error(error.reponse?.data?.message || "Something went wrong")
+        } finally {
+            set({isMessagesLoading: false})
+        }
+    }
 }))
