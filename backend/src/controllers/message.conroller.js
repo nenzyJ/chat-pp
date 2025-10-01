@@ -70,7 +70,10 @@ export const sendMessage = async (req, res) => {
     await newMessage.save();
     //todo: send message in real-time
     res.status(201).json(newMessage);
-  } catch (error) {}
+  } catch (error) {
+    console.log("Error in sendMessage:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 export const getChatPartners = async (req, res) => {
