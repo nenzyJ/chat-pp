@@ -12,12 +12,23 @@ export const useChatStore = create((set, get) => ({
     isUsersLoading: false,
     isMessagesLoading: false,
     isSoundEnabled: localStorage.getItem("isSoundEnabled") === "true",
+    // modal state
+    isImageModalOpen: false,
+    selectedImageUrl: null,
 
     toggleSound: () => {
         const newValue = !get().isSoundEnabled;
         localStorage.setItem("isSoundEnabled", newValue.toString())
         set({isSoundEnabled: newValue})
     },
+    openImageModal: (imageUrl) => set({ 
+        isImageModalOpen: true, 
+        selectedImageUrl: imageUrl 
+    }),
+    closeImageModal: () => set({ 
+        isImageModalOpen: false, 
+        selectedImageUrl: null 
+    }),
     setActiveTab: (tab) => set({activeTab: tab}),
     // preferred name
     setSelectedUser: (selectedUser) => set({ selectedUser }),
