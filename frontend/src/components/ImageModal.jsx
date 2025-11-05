@@ -23,30 +23,31 @@ const ImageModal = ({ isOpen, imageUrl, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm animate-in fade-in duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm p-2 sm:p-4"
       onClick={onClose}
     >
       {/* Модальне вікно */}
       <div 
-        className="relative max-w-4xl max-h-[90vh] p-4"
+        className="relative w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Кнопка закриття */}
         <button
           onClick={onClose}
-          className="ml-auto z-10 w-10 h-10 text-white rounded-full flex items-center justify-center text-xl font-bold"
-          aria-label="Закрити"
+          className="ml-auto z-10 w-8 h-8 sm:w-10 sm:h-10 text-white rounded-full flex items-center justify-center text-lg sm:text-xl font-bold transition-colors"
+          aria-label="Close"
         >
-          ×
+
         </button>
         
         {/* Зображення */}
         <img 
           src={imageUrl} 
-          alt="Розширений перегляд" 
-          className="max-w-full max-h-full object-contain rounded-lg shadow-2xl "
-          style={{ maxHeight: '90vh' }}
+          alt="Full size" 
+          className="w-full h-full max-h-[95vh] sm:max-h-[90vh] object-contain rounded-lg shadow-2xl"
         />
+        
+        
       </div>
     </div>
   );

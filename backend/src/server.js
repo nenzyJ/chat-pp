@@ -11,7 +11,7 @@ const app = express();
 
 const __dirname = path.resolve();
 
-const PORT = ENV.PORT || 3000;
+const PORT = ENV.PORT || 5001;
 
 app.use(express.json({ limit: '50mb' })); // to parse json body with larger limit
 app.use(express.urlencoded({ limit: '50mb', extended: true }));

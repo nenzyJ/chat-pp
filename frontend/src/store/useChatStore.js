@@ -15,6 +15,8 @@ export const useChatStore = create((set, get) => ({
     // modal state
     isImageModalOpen: false,
     selectedImageUrl: null,
+    // mobile menu state
+    isMobileMenuOpen: false,
 
     toggleSound: () => {
         const newValue = !get().isSoundEnabled;
@@ -29,11 +31,20 @@ export const useChatStore = create((set, get) => ({
         isImageModalOpen: false, 
         selectedImageUrl: null 
     }),
+    // mobile menu methods
+    toggleMobileMenu: () => set({ isMobileMenuOpen: !get().isMobileMenuOpen }),
+    closeMobileMenu: () => set({ isMobileMenuOpen: false }),
     setActiveTab: (tab) => set({activeTab: tab}),
     // preferred name
-    setSelectedUser: (selectedUser) => set({ selectedUser }),
+    setSelectedUser: (selectedUser) => set({ 
+        selectedUser, 
+        isMobileMenuOpen: false // Закриваємо мобільне меню при виборі чату
+    }),
     // backward compatibility for older components
-    setSelectUser: (selectedUser) => set({ selectedUser }),
+    setSelectUser: (selectedUser) => set({ 
+        selectedUser, 
+        isMobileMenuOpen: false 
+    }),
 
     getAllContacts: async() => {
         set({isUsersLoading: true});

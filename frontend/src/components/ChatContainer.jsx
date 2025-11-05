@@ -41,26 +41,25 @@ const ChatContainer = () => {
   return (
     <>
       <ChatHeader/>
-      <div className='flex-1 px-6 overflow-y-auto py-8'>
+      <div className='flex-1 px-3 sm:px-6 overflow-y-auto py-4 sm:py-8'>
         {messages.length > 0 && !isMessagesLoading ? (
-          <div className='max-w-3xl mx-auto space-y-6'>
+          <div className='max-w-3xl mx-auto space-y-4 sm:space-y-6'>
             {messages.map(msg => (
               <div key={msg._id} className={`chat ${msg.senderId === authUser._id ? "chat-end" : "chat-start"}`}>
-                <div className={`chat-bubble relative ${msg.senderId === authUser._id ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-200"}`}>
+                <div className={`chat-bubble relative max-w-xs sm:max-w-md lg:max-w-lg xl:max-w-xl ${msg.senderId === authUser._id ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-200"}`}>
                   {msg.image && (
                     <img 
                       src={msg.image} 
                       alt='Shared' 
-                      className='rounded-lg h-48 object-cover cursor-pointer' 
+                      className='rounded-lg h-32 sm:h-40 lg:h-48 w-full object-cover cursor-pointer' 
                       onClick={() => handleImageClick(msg.image)}
                       title="Натисніть для розширеного перегляду"
                     />
                   )}
-                  {msg.text && <p className='mt-2'>{msg.text}</p>}
-                  <p className='text-sm mt-1 opacity-75 flex items-center gap-1'>
+                  {msg.text && <p className='mt-2 text-sm sm:text-base break-words'>{msg.text}</p>}
+                  <p className='text-xs sm:text-sm mt-1 opacity-75 flex items-center gap-1'>
                     {new Date(msg.createdAt).toISOString().slice(11,16)}
                   </p>
-
                 </div>
               </div>
             ))}

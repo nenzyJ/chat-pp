@@ -18,7 +18,7 @@ const App = () => {
   if(isCheckingAuth) return <PageLoader />
 
   return (
-    <div className="min-h-screen bg-slate-900 relative flex items-center justify-center p-4 overflow-hidden">
+    <div className="min-h-screen bg-slate-900 relative lg:flex lg:items-center lg:justify-center lg:p-4 overflow-hidden">
 
       {/* DECORATES */}
 

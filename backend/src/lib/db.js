@@ -3,10 +3,12 @@ import { ENV } from "./env.js";
 
 export const connectDB = async (mongoURI) => {
   try {
-    const conn = await mongoose.connect(ENV.MONGO_URI);
+    const mongoUrl = ENV.MONGO_URI || "mongodb://localhost:27017/chat-app";
+    const conn = await mongoose.connect(mongoUrl);
     console.log("MongoDB connected:", conn.connection.host);
   } catch (error) {
     console.log("Error in DB connection:", error);
-    process.exit(1); // 1 status code mean fail, 0 mean success
+    console.log("Server will continue without database connection...");
+    // Не завершуємо процес, дозволяємо серверу працювати без БД
   }
 };
